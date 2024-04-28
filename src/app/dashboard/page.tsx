@@ -18,7 +18,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -34,16 +33,17 @@ import {
     TabsContent,
 } from "@/components/ui/tabs"
 
-import { getChirii } from "@/lib/actions"
-// import { auth } from "@clerk/nextjs/server"
-
-
+import { deleteChirieById, getChiriileMele } from "@/lib/actions"
 
 
 export default async function Dashboard() {
-    // const { getToken } = auth()
-    // const token = await getToken()
-    // console.log(token)
+    const chirii = await getChiriileMele();
+
+    async function handleDelete(data: FormData) {
+        "use server"
+        const id = data.get("id") as string;
+        await deleteChirieById(id);
+    }
 
     return (
         <Tabs defaultValue="all">
@@ -84,42 +84,54 @@ export default async function Dashboard() {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell className="hidden sm:table-cell">
-                                        <Image
-                                            alt="Product image"
-                                            className="aspect-square rounded-md object-cover"
-                                            height="64"
-                                            src="/placeholder.svg"
-                                            width="64"
-                                        />
-                                    </TableCell>
-                                    <TableCell className="font-medium">
-                                        Laser Lemonade Machine
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell">
-                                        $499.99
-                                    </TableCell>
-                                    <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    aria-haspopup="true"
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontal className="h-4 w-4" />
-                                                    <span className="sr-only">Toggle menu</span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
+                                {
+                                    chirii.map(({ propertyInfo, adress, id, images }) => (
+                                        <TableRow key={id}>
+                                            <TableCell className="hidden sm:table-cell">
+                                                {
+                                                    images.length > 0 ?
+                                                        <Image
+                                                            alt="Product image"
+                                                            className="aspect-square rounded-md object-cover"
+                                                            height="64"
+                                                            src={images[0]}
+                                                            width="64"
+                                                        /> :
+                                                        <div className="aspect-square rounded-md bg-green-500" />
+                                                }
+                                            </TableCell>
+                                            <TableCell className="font-medium">
+                                                {propertyInfo.type} cu {propertyInfo.rooms} camere în {adress.city}, {propertyInfo.surface}
+                                            </TableCell>
+                                            <TableCell className="hidden md:table-cell">
+                                                {propertyInfo.price} €
+                                            </TableCell>
+                                            <TableCell>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button
+                                                            aria-haspopup="true"
+                                                            size="icon"
+                                                            variant="ghost"
+                                                        >
+                                                            <MoreHorizontal className="h-4 w-4" />
+                                                            <span className="sr-only">Toggle menu</span>
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent align="end">
+                                                        <form action={handleDelete}>
+                                                            <input name="id" type="hidden" value={id} />
+                                                            <DropdownMenuItem>
+                                                                <Button className="" size="sm" type="submit">
+                                                                    Delete
+                                                                </Button>
+                                                            </DropdownMenuItem>
+                                                        </form>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </TableCell>
+                                        </TableRow>))
+                                }
                             </TableBody>
                         </Table>
                     </CardContent>

@@ -21,6 +21,7 @@ import {
     TooltipTrigger,
     TooltipProvider
 } from "@/components/ui/tooltip"
+import Link from "next/link"
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
@@ -32,113 +33,23 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                             <Triangle className="size-5 fill-foreground" />
                         </Button>
                     </div>
-                    <nav className="grid gap-1 p-2">
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-lg bg-muted"
-                                    aria-label="Playground"
-                                >
-                                    <SquareTerminal className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Agent Chirii
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-lg"
-                                    aria-label="Models"
-                                >
-                                    <Bot className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Models
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-lg"
-                                    aria-label="API"
-                                >
-                                    <Code2 className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                API
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-lg"
-                                    aria-label="Documentation"
-                                >
-                                    <Book className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Documentation
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-lg"
-                                    aria-label="Settings"
-                                >
-                                    <Settings2 className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Settings
-                            </TooltipContent>
-                        </Tooltip>
-                    </nav>
                     <nav className="mt-auto grid gap-1 p-2">
                         <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="mt-auto rounded-lg"
-                                    aria-label="Help"
-                                >
-                                    <LifeBuoy className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Help
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="mt-auto rounded-lg"
-                                    aria-label="Account"
-                                >
-                                    <SquareUser className="size-5" />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="right" sideOffset={5}>
-                                Account
-                            </TooltipContent>
+                            <Link href="/dashboard">
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="mt-auto rounded-lg"
+                                        aria-label="Account"
+                                    >
+                                        <SquareUser className="size-5" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent side="right" sideOffset={5}>
+                                    Proprietar
+                                </TooltipContent>
+                            </Link>
                         </Tooltip>
                     </nav>
                 </aside>
@@ -155,34 +66,16 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                                 className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring" x-chunk="dashboard-03-chunk-1"
                             >
                                 <Label htmlFor="message" className="sr-only">
-                                    Message
+                                    Mesaj
                                 </Label>
                                 <Textarea
                                     id="message"
-                                    placeholder="Type your message here..."
+                                    placeholder="Scrie un mesaj aici..."
                                     className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
                                 />
                                 <div className="flex items-center p-3 pt-0">
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                            <Button variant="ghost" size="icon">
-                                                <Paperclip className="size-4" />
-                                                <span className="sr-only">Attach file</span>
-                                            </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="top">Attach File</TooltipContent>
-                                    </Tooltip>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                            <Button variant="ghost" size="icon">
-                                                <Mic className="size-4" />
-                                                <span className="sr-only">Use Microphone</span>
-                                            </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="top">Use Microphone</TooltipContent>
-                                    </Tooltip>
                                     <Button type="submit" size="sm" className="ml-auto gap-1.5">
-                                        Send Message
+                                        Scrie un mesaj
                                         <CornerDownLeft className="size-3.5" />
                                     </Button>
                                 </div>
@@ -191,6 +84,6 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                     </main>
                 </div>
             </div>
-        </TooltipProvider>
+        </TooltipProvider >
     )
 }

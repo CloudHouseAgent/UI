@@ -4,7 +4,6 @@ import { getChirii } from "@/lib/actions";
 
 export default async function Page() {
   const chirii = await getChirii();
-  console.log(chirii);
 
   if (chirii.length === 0) {
     return <div>loading...</div>;
