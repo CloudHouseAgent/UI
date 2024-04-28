@@ -87,7 +87,7 @@ export default function Dashboard() {
                                         <SelectContent>
                                             <SelectItem value="clothing">Clothing</SelectItem>
                                             <SelectItem value="electronics">
-                                                Electroni
+                                                Electron
                                             </SelectItem>
                                         </SelectContent>
                                     </Select>
