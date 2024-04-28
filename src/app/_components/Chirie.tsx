@@ -20,30 +20,31 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import { ChirieType } from "@/types/chirie"
 
 
-const img_url = 'https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6Im1vZjZ5dW01bjM0MzItQVJPIiwidyI6W3siZm4iOiIzdzU2NnhnanB5MnAxLUFSTyIsInMiOiIxNCIsInAiOiIxMCwtMTAiLCJhIjoiMCJ9XX0.iLW6bvSn-qjNVBcn0297CKaMoZcCJYI3vrryJ-BuSPM/image;s=1280x1024;q=80';
+export function Chirie({ chirie }: { chirie: ChirieType }) {
+    const { adress, propertyInfo, otherInfo, images } = chirie;
 
-export function Chirie() {
+    const title = `${propertyInfo.type} cu ${propertyInfo.rooms} camere în ${adress.city}, ${propertyInfo.surface}mp`;
+
     return (
-        <Card className="w-[350px]">
+        <Card className="w-[350px] h-[450px]">
             <CardHeader>
-                <CardTitle>Apartament finisat, la cheie</CardTitle>
-                <CardDescription className="text-primary">63 000 €</CardDescription>
-                <CardDescription>Apartament in micro cu 2 camere cu bucatarie separata, se preda complet mobilat.</CardDescription>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription className="text-primary">{propertyInfo.price} €</CardDescription>
+                <CardDescription className="h-[50px]">{otherInfo.description}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Carousel>
                     <CarouselContent>
-                        <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
-                        </CarouselItem>
-                        <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
-                        </CarouselItem>
-                        <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
-                        </CarouselItem>
+                        {
+                            images.map((img, index) =>
+                                <CarouselItem key={index}>
+                                    <Image src={img} alt="apartment" width={350} height={200} />
+                                </CarouselItem>
+                            )
+                        }
                     </CarouselContent>
                     {/* <CarouselPrevious /> */}
                     {/* <CarouselNext /> */}
@@ -51,7 +52,7 @@ export function Chirie() {
             </CardContent>
             <CardFooter className="flex justify-between">
                 <Button asChild>
-                    <Link href="1">
+                    <Link href={`/${chirie.id}`}>
                         Vezi oferta
                     </Link>
                 </Button>

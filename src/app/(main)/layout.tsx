@@ -7,13 +7,11 @@ import {
     Mic,
     Paperclip,
     Settings2,
-    Share,
     SquareTerminal,
     SquareUser,
     Triangle,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
