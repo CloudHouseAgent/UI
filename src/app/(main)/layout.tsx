@@ -145,27 +145,13 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                     </nav>
                 </aside>
                 <div className="flex flex-col">
-                    <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
-                        <h1 className="text-xl font-semibold">Agent chirii</h1>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            className="ml-auto gap-1.5 text-sm"
-                        >
-                            <Share className="size-3.5" />
-                            Share
-                        </Button>
-                    </header>
-                    <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-4">
+                    <main className="flex h-screen">
                         <div
-                            className="relative hidden flex-col items-start gap-8 md:flex lg:col-span-2" x-chunk="dashboard-03-chunk-0"
+                            className="p-4 relative hidden w-3/4 f-hull overflow-y-auto flex-row flex-wrap justify-center gap-4 md:flex" x-chunk="dashboard-03-chunk-0"
                         >
                             {children}
                         </div>
-                        <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
-                            <Badge variant="outline" className="absolute right-3 top-3">
-                                Output
-                            </Badge>
+                        <div className="relative flex h-full flex-col rounded-xl bg-muted/50 p-4 w-1/4">
                             <div className="flex-1" />
                             <form
                                 className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring" x-chunk="dashboard-03-chunk-1"

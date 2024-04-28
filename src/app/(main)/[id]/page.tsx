@@ -24,29 +24,34 @@ import {
 
 const img_url = 'https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6Im1vZjZ5dW01bjM0MzItQVJPIiwidyI6W3siZm4iOiIzdzU2NnhnanB5MnAxLUFSTyIsInMiOiIxNCIsInAiOiIxMCwtMTAiLCJhIjoiMCJ9XX0.iLW6bvSn-qjNVBcn0297CKaMoZcCJYI3vrryJ-BuSPM/image;s=1280x1024;q=80';
 
-export function Chirie() {
+
+
+export default function Page() {
     return (
-        <Card className="w-[350px]">
+        <Card className="">
             <CardHeader>
                 <CardTitle>Apartament finisat, la cheie</CardTitle>
                 <CardDescription className="text-primary">63 000 €</CardDescription>
                 <CardDescription>Apartament in micro cu 2 camere cu bucatarie separata, se preda complet mobilat.</CardDescription>
             </CardHeader>
-            <CardContent>
-                <Carousel>
+            <CardContent className="">
+                <Carousel className="w-[750px]">
                     <CarouselContent>
                         <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
+                            <Image src={img_url} alt="apartment" width={750} height={200} />
                         </CarouselItem>
                         <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
+                            <Image src={img_url} alt="apartment" width={750} height={200} />
                         </CarouselItem>
                         <CarouselItem>
-                            <Image src={img_url} alt="apartment" width={350} height={200} />
+                            <Image src={img_url} alt="apartment" width={750} height={200} />
                         </CarouselItem>
                     </CarouselContent>
-                    {/* <CarouselPrevious /> */}
-                    {/* <CarouselNext /> */}
+                    <div>
+                        <p>Salut</p>
+                    </div>
+                    <CarouselPrevious />
+                    <CarouselNext />
                 </Carousel>
             </CardContent>
             <CardFooter className="flex justify-between">
