@@ -1,58 +1,19 @@
-import Image from "next/image"
 import Link from "next/link"
 import {
-    ChevronLeft,
     Home,
-    LineChart,
-    Package,
     Package2,
     PanelLeft,
-    PlusCircle,
-    Settings,
-    ShoppingCart,
-    Upload,
-    Users2,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { Textarea } from "@/components/ui/textarea"
-import {
-    ToggleGroup,
-    ToggleGroupItem,
-} from "@/components/ui/toggle-group"
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
     TooltipProvider
 } from "@/components/ui/tooltip"
+import { SignedIn, UserButton } from "@clerk/nextjs"
 
 
 
@@ -84,6 +45,11 @@ export default function Layout({
                             </TooltipTrigger>
                             <TooltipContent side="right">Acasa</TooltipContent>
                         </Tooltip>
+                        <div className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                            <SignedIn>
+                                <UserButton />
+                            </SignedIn>
+                        </div>
                     </nav>
                 </aside>
                 <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
