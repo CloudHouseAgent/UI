@@ -22,7 +22,7 @@ export async function getChirii() {
   }
 
   const json = (await response.json()) as ChirieType[];
-  console.log(json);
+  // console.log(json);
   return json;
 }
 
