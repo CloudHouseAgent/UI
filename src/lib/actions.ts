@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 import axios from "axios";
 import { redirect } from "next/navigation";
 
-const API_URL = "https://agent-vanzari-ai-api.azurewebsites.net";
+const API_URL = "http://localhost:4000";
 
 export async function getChirii() {
   const response = await fetch(`${API_URL}/chirii`, {
@@ -54,15 +54,19 @@ export async function createChirie(formData: FormData) {
 
   console.log("Creating chiria", formData);
 
-  const response = axios.post(`${API_URL}/chirii`, formData, {
+  const response = await axios.post(`${API_URL}/chirii`, formData, {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     },
   });
-  revalidateTag("chirii");
 
-  console.log(response);
+  if (response.status !== 200) {
+    console.log(response);
+    throw new Error("Eroare la crearea chirii");
+  }
+
+  revalidateTag("chirii");
   redirect("/dashboard");
 }
 
