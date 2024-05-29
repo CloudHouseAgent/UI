@@ -29,8 +29,34 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { createChirie } from "@/lib/actions";
+import { createChirie, getChirieDescriptionFromParams } from "@/lib/actions";
 import Image from "next/image";
+
+import React from "react";
+
+const Loader = () => (
+  <div className="loader">
+    <style jsx>{`
+      .loader {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    `}</style>
+  </div>
+);
 
 const formSchema = z.object({
   adress: z.object({
@@ -117,6 +143,7 @@ const formSchema = z.object({
 export default function Dashboard() {
   const [uploadedImages, setUploadedImages] = useState<FileList | null>(null);
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -162,50 +189,16 @@ export default function Dashboard() {
     },
   });
 
-  const onAutocomplete = async () => {
-    const newValues = {
-      adress: {
-        location: "Strada Noua 2",
-        floor: 2,
-        city: "Cluj-Napoca",
-        county: "Cluj",
-        country: "Romania",
-      },
-      propertyInfo: {
-        rooms: 2,
-        surface: 20,
-        year: new Date().getFullYear() - 10,
-        state: "Foarte bună",
-        furnished: true,
-        price: 1000,
-        warranty: true,
-        type: "Semidecomandat",
-        comfort: "Sporit",
-      },
-      facilities: {
-        internet: true,
-        cableTv: true,
-        airConditioning: true,
-        centralHeating: true,
-        fridge: true,
-        stove: true,
-        washingMachine: true,
-        lift: true,
-        parking: true,
-        storageSpace: true,
-        balcony: true,
-        smokeDetector: true,
-        gasDetector: false,
-      },
-      otherInfo: {
-        description: "O chirie excelenta!",
-        freeFrom: new Date().toLocaleDateString(),
-        petsAllowed: true,
-      },
-    };
-
-    form.reset(newValues);
-  };
+  async function onAutocomplete(data: z.infer<typeof formSchema>) {
+    try {
+      setLoading(true);
+      const description = await getChirieDescriptionFromParams(data);
+      form.setValue("otherInfo.description", description);
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  }
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     if (!uploadedImages || uploadedImages.length === 0) {
@@ -270,42 +263,6 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Descriere</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <FormField
-                          control={form.control}
-                          name="otherInfo.description"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl>
-                                <Textarea {...field} className="min-h-32" />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <CardFooter className="p-4">
-                          <div className="flex items-center justify-end gap-2">
-                            <Button
-                              size="sm"
-                              type="button"
-                              onClick={() => onAutocomplete()}
-                            >
-                              AI Autocomplete
-                              <Image
-                                src="https://agentvanzariaistorage2.blob.core.windows.net/agentvanzariaicontainer2/a75b9107-eeed-4568-b055-d9dd89436cfb.png"
-                                alt=""
-                                width={20}
-                                height={20}
-                              />
-                            </Button>
-                          </div>
-                        </CardFooter>
-                      </CardContent>
-                    </Card>
                     <Card>
                       <CardHeader>
                         <CardTitle>Adresa</CardTitle>
@@ -794,6 +751,43 @@ export default function Dashboard() {
                             </FormItem>
                           )}
                         />
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Descriere</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <FormField
+                          control={form.control}
+                          name="otherInfo.description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Textarea {...field} className="min-h-32" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <CardFooter className="p-4">
+                          <div className="flex items-center justify-end gap-2">
+                            <Button
+                              size="sm"
+                              type="button"
+                              onClick={form.handleSubmit(onAutocomplete)}
+                            >
+                              {loading ? <Loader /> : "AI Complete"}
+                              <Image
+                                src="https://agentvanzariaistorage2.blob.core.windows.net/agentvanzariaicontainer2/a75b9107-eeed-4568-b055-d9dd89436cfb.png"
+                                alt=""
+                                width={20}
+                                height={20}
+                              />
+                            </Button>
+                          </div>
+                        </CardFooter>
                       </CardContent>
                     </Card>
                   </div>
