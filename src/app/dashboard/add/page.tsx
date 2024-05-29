@@ -247,8 +247,10 @@ export default function Dashboard() {
               <Button variant="outline" size="sm" asChild>
                 <Link href="/dashboard">Renunta</Link>
               </Button>
-              <Button type="submit" size="sm">
-                Adauga
+              <Button type="submit" size="sm" disabled={form.formState.isSubmitting}>
+                {
+                  form.formState.isSubmitting ? <Loader /> : "Adauga"
+                }
               </Button>
             </div>
           </div>
@@ -419,7 +421,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="propertyInfo.furnished"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Mobilat</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -452,7 +454,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="propertyInfo.warranty"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Garantie</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -504,7 +506,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.internet"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Internet</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -520,7 +522,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.cableTv"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Televiziune prin cablu</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -536,7 +538,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.airConditioning"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Aer conditionat</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -552,7 +554,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.centralHeating"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Centrala termica</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -568,7 +570,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.fridge"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Frigider</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -584,7 +586,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.stove"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Cuptor</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -600,7 +602,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.washingMachine"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Mașină de spălat</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -616,7 +618,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.lift"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Lift</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -632,7 +634,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.parking"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Parcare</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -648,7 +650,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.storageSpace"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Depozitare</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -664,7 +666,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.balcony"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Balcon</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -680,7 +682,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.smokeDetector"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Detector de fum</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -696,7 +698,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="facilities.gasDetector"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Detector de gaz</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -723,7 +725,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="otherInfo.freeFrom"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2">
                               <FormLabel>Disponibil din</FormLabel>
                               <FormControl>
                                 <Input
@@ -739,7 +741,7 @@ export default function Dashboard() {
                           control={form.control}
                           name="otherInfo.petsAllowed"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2 my-2">
                               <FormLabel>Animale de companie</FormLabel>
                               <FormControl>
                                 <Checkbox
@@ -763,9 +765,9 @@ export default function Dashboard() {
                           control={form.control}
                           name="otherInfo.description"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex items-center gap-2">
                               <FormControl>
-                                <Textarea {...field} className="min-h-32" />
+                                <Textarea {...field} className="min-h-32" disabled={loading} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
