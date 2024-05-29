@@ -117,3 +117,23 @@ export async function getChirieById(id: string) {
 
   return (await response.json()) as ChirieType;
 }
+
+export async function getChirieDescriptionFromParams(data: any) {
+  const { getToken } = auth();
+  const token = await getToken();
+
+  //console.log(data);
+  const response = await axios.post(`${API_URL}/chirii/description`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (response.status !== 200) {
+    console.log(response);
+    throw new Error("Eroare la preluarea descrierii chirii");
+  }
+
+  return response.data;
+}
