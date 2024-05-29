@@ -34,7 +34,9 @@ import Image from "next/image";
 
 const formSchema = z.object({
   adress: z.object({
-    location: z.string(),
+    location: z.string().min(3, {
+      message: "Locatia trebuie sa aiba cel putin 3 caractere",
+    }),
     floor: z
       .union([z.string(), z.number()])
       .transform((val) => (typeof val === "string" ? parseInt(val, 10) : val))
@@ -42,9 +44,15 @@ const formSchema = z.object({
         message: "Etajul trebuie să fie între -100 și 1000",
       })
       .optional(),
-    city: z.string(),
-    county: z.string(),
-    country: z.string(),
+    city: z.string().min(3, {
+      message: "Orasul trebuie sa aiba cel putin 3 caractere",
+    }),
+    county: z.string().min(3, {
+      message: "Judetul trebuie sa aiba cel putin 3 caractere",
+    }),
+    country: z.string().min(3, {
+      message: "Tara trebuie sa aiba cel putin 3 caractere",
+    }),
   }),
   propertyInfo: z.object({
     rooms: z
@@ -79,7 +87,9 @@ const formSchema = z.object({
       })
       .optional(),
     warranty: z.boolean(),
-    type: z.string(),
+    type: z.string().min(3, {
+      message: "Tipul trebuie sa aiba cel putin 3 caractere",
+    }),
     comfort: z.string(),
   }),
   facilities: z.object({
