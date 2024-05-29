@@ -10,6 +10,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -29,6 +30,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { createChirie } from "@/lib/actions";
+import Image from "next/image";
 
 const formSchema = z.object({
   adress: z.object({
@@ -150,6 +152,51 @@ export default function Dashboard() {
     },
   });
 
+  const onAutocomplete = async () => {
+    const newValues = {
+      adress: {
+        location: "Strada Noua 2",
+        floor: 2,
+        city: "Cluj-Napoca",
+        county: "Cluj",
+        country: "Romania",
+      },
+      propertyInfo: {
+        rooms: 2,
+        surface: 20,
+        year: new Date().getFullYear() - 10,
+        state: "Foarte bună",
+        furnished: true,
+        price: 1000,
+        warranty: true,
+        type: "Semidecomandat",
+        comfort: "Sporit",
+      },
+      facilities: {
+        internet: true,
+        cableTv: true,
+        airConditioning: true,
+        centralHeating: true,
+        fridge: true,
+        stove: true,
+        washingMachine: true,
+        lift: true,
+        parking: true,
+        storageSpace: true,
+        balcony: true,
+        smokeDetector: true,
+        gasDetector: false,
+      },
+      otherInfo: {
+        description: "O chirie excelenta!",
+        freeFrom: new Date().toLocaleDateString(),
+        petsAllowed: true,
+      },
+    };
+
+    form.reset(newValues);
+  };
+
   async function onSubmit(data: z.infer<typeof formSchema>) {
     if (!uploadedImages || uploadedImages.length === 0) {
       toast({
@@ -213,19 +260,42 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <FormField
-                      control={form.control}
-                      name="otherInfo.description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Descriere</FormLabel>
-                          <FormControl>
-                            <Textarea {...field} className="min-h-32" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Descriere</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <FormField
+                          control={form.control}
+                          name="otherInfo.description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Textarea {...field} className="min-h-32" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <CardFooter className="p-4">
+                          <div className="flex items-center justify-end gap-2">
+                            <Button
+                              size="sm"
+                              type="button"
+                              onClick={() => onAutocomplete()}
+                            >
+                              AI Autocomplete
+                              <Image
+                                src="https://agentvanzariaistorage2.blob.core.windows.net/agentvanzariaicontainer2/a75b9107-eeed-4568-b055-d9dd89436cfb.png"
+                                alt=""
+                                width={20}
+                                height={20}
+                              />
+                            </Button>
+                          </div>
+                        </CardFooter>
+                      </CardContent>
+                    </Card>
                     <Card>
                       <CardHeader>
                         <CardTitle>Adresa</CardTitle>
