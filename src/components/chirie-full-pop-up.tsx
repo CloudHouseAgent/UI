@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { getChirieById } from "@/lib/actions";
 
 export default async function ChirieFullPopUp({ params }: { params: { id: string } }) {
-  const { propertyInfo, adress, id, images, otherInfo, facilities } = await getChirieById(params.id);
+  const { propertyInfo, adress, contact, id, images, otherInfo, facilities } = await getChirieById(params.id);
   const title = `${propertyInfo.type} cu ${propertyInfo.rooms} camere în ${adress.city}, ${propertyInfo.surface}mp`;
 
   return (
@@ -234,8 +234,8 @@ export default async function ChirieFullPopUp({ params }: { params: { id: string
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div>
-                  <div className="font-semibold">John Doe</div>
-                  <div className="text-gray-500 dark:text-gray-400">john.doe@example.com</div>
+                  <div className="font-semibold">{contact.name}</div>
+                  <div className="text-gray-500 dark:text-gray-400">{contact.email}</div>
                 </div>
               </div>
               <Button className="w-full md:w-auto">
