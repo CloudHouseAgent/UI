@@ -34,7 +34,7 @@ export default function Page() {
   async function initialMessage() {
     setConversation((currentMessages: ClientMessage[]) => [
       ...currentMessages,
-      { role: "assistant", display: <div>Salut! Cum te pot ajuta?</div> },
+      { role: "assistant", display: <div>Salut, sunt asistentul tau virtual, scopul meu este sa te ajut sa gasesti chiria dorita. Ce anume cauti?</div> },
     ]);
   }
 
