@@ -5,7 +5,7 @@ import {createAI, getMutableAIState, streamUI} from "ai/rsc";
 import {z} from "zod";
 import {openai} from "@ai-sdk/openai";
 import {getChirii} from "@/lib/actions";
-import {Chirie} from "@/app/_components/Chirie";
+import {Chirie} from "@/app/_components/chirie";
 
 export interface ServerMessage {
     role: 'user' | 'assistant';
@@ -69,7 +69,7 @@ export async function continueConversation(
 
                     return <div className="p-4">
                         <p className="text-lg font-semibold mb-2">Chirii disponibile conform criteriilor tale:</p>
-                        <div className="flex flex-row flex-wrap justify-center">
+                        <div className="flex flex-row flex-wrap justify-left">
                         {
                             chirii.map((chirie) => {
                                 return <Chirie chirie={chirie} key={chirie.id} />;
