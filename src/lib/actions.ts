@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 import axios from "axios";
 import { redirect } from "next/navigation";
 
-const API_URL = "http://localhost:4000";
+const API_URL = process.env.REST_API_URL;
 
 export async function getChirii() {
   const response = await fetch(`${API_URL}/chirii`, {
