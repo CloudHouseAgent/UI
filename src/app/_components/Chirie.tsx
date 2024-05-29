@@ -1,9 +1,17 @@
 import * as React from "react"
 import Image from "next/image"
-import { Heart } from "lucide-react"
-import Link from "next/link"
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
-import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
@@ -21,6 +29,9 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { ChirieType } from "@/types/chirie"
+import SingleChirie from "@/app/(main)/single";
+import {Button} from "@/components/ui/button";
+import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
 
 
 export function Chirie({ chirie }: { chirie: ChirieType }) {
@@ -29,7 +40,7 @@ export function Chirie({ chirie }: { chirie: ChirieType }) {
     const title = `${propertyInfo.type} cu ${propertyInfo.rooms} camere în ${adress.city}, ${propertyInfo.surface}mp`;
 
     return (
-        <Card className="w-[350px] h-[450px]">
+        <Card className="w-[350px] h-[450px] m-4">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription className="text-primary">{propertyInfo.price} €</CardDescription>
@@ -51,15 +62,14 @@ export function Chirie({ chirie }: { chirie: ChirieType }) {
                 </Carousel>
             </CardContent>
             <CardFooter className="flex justify-between">
-                <Button asChild>
-                    <Link href={`/${chirie.id}`}>
-                        Vezi oferta
-                    </Link>
-                </Button>
-                <Button variant="ghost" size="icon" aria-label="Love">
-                    {/* <Heart className="size-5 fill-foreground" /> */}
-                    <Heart className="size-5" />
-                </Button>
+                    <Dialog>
+                    <Button className="bg-primary text-white" asChild>
+                        <DialogTrigger>Vezi detalii</DialogTrigger>
+                    </Button>
+                        <DialogContent className="overflow-y-auto">
+                            <SingleChirie params={{ id: chirie.id }} />
+                        </DialogContent>
+                    </Dialog>
             </CardFooter>
         </Card >
     )

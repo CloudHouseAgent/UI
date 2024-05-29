@@ -8,8 +8,15 @@ import { redirect } from "next/navigation";
 
 const API_URL = process.env.REST_API_URL;
 
-export async function getChirii() {
-  const response = await fetch(`${API_URL}/chirii`, {
+export async function getChirii(detaliiChirii: string, numarChirii: number) {
+  const query = new URLSearchParams();
+  query.append("detaliiChirii", detaliiChirii);
+  query.append("numarChirii", numarChirii.toString());
+
+  const response = await fetch(`${API_URL}/chirii?${query.toString()}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "GET",
     next: {
       tags: ["chirii"],
@@ -22,7 +29,6 @@ export async function getChirii() {
   }
 
   const json = (await response.json()) as ChirieType[];
-  // console.log(json);
   return json;
 }
 

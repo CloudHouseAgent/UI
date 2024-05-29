@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/toaster"
+import React from "react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -12,7 +13,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Agent007 - Chiria ta in 2 clickuri!",
+  title: "Chiria ta in 2 clickuri!",
   description: "Agentul tau de incredere in imobiliare!",
 };
 
@@ -23,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
@@ -31,7 +32,7 @@ export default function RootLayout({
           )}
         >
           <ThemeProvider
-            attribute="class"
+            attribute={"class"}
             defaultTheme="dark">
             {children}
           </ThemeProvider>

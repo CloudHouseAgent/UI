@@ -13,19 +13,17 @@ import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
 } from "@/components/ui/carousel"
 import { getChirieById } from "@/lib/actions"
 
 
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function SingleChirie({ params }: { params: { id: string } }) {
     const { propertyInfo, adress, id, images, otherInfo, facilities } = await getChirieById(params.id);
     const title = `${propertyInfo.type} cu ${propertyInfo.rooms} camere în ${adress.city}, ${propertyInfo.surface}mp`;
 
     return (
-        <Card className="">
+        <Card className="max-w-full h-[800px] overflow-y-auto overflow-x-hidden">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription className="text-primary text-xl">{propertyInfo.price} €</CardDescription>
@@ -83,8 +81,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <div>Animale de companie: {otherInfo.petsAllowed ? 'Da' : 'Nu'}</div>
                         </div>
                     </div>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                    {/*<CarouselPrevious />*/}
+                    {/*<CarouselNext />*/}
                 </Carousel>
             </CardContent>
             <CardFooter className="flex justify-between">

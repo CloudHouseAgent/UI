@@ -6,6 +6,7 @@ const nextConfig = {
       "agentvanzariaistorage2.blob.core.windows.net",
     ],
   },
+  reactStrictMode: false
 };
 
 export default nextConfig;
