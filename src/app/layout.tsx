@@ -13,7 +13,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Chiria ta in 2 clickuri!",
+  title: "Gaseste chiria dorita!",
   description: "Agentul tau de incredere in imobiliare!",
 };
 
