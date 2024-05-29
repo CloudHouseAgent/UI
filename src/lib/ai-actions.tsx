@@ -29,7 +29,7 @@ export async function continueConversation(
         Esti un asistent de vanzari pentru chirii, scopul tau este sa ajuti clientii sa gaseasca chiria dorita.
         Daca utilizatorul nu e dispus sa dea detalii multe, poti sa ii oferi chirii disponibile in functie de criteriile tale.
         Daca specifica ca vrea doar o chirie, seteaza numarul de chirii pe care sa le returneze la 1.
-        Ai intrebat initial: 'Salut, cum te pot ajuta?'`,
+        Ai intrebat initial: 'Salut, sunt asistentul tau virtual, scopul meu este sa te ajut sa gasesti chiria dorita. Ce anume cauti?'`,
         messages: [...history.get(), { role: 'user', content: input }],
         text: ({ content, done }) => {
             if (done) {

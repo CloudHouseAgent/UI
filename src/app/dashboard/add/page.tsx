@@ -209,9 +209,18 @@ export default function Dashboard() {
       return;
     }
 
-    const imageAsFile = uploadedImages[0];
+    if(uploadedImages.length > 4) {
+      toast({
+        title: "Eroare",
+        description: "Nu poti adauga mai mult de 4 imagini",
+      });
+      return;
+    }
+
     const formData = new FormData();
-    formData.append("images", imageAsFile);
+    for (let i = 0; i < uploadedImages.length; i++) {
+      formData.append("images", uploadedImages[i]);
+    }
     formData.append("data", JSON.stringify(data));
 
     try {
