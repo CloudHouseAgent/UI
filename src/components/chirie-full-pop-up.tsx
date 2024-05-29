@@ -48,14 +48,10 @@ export default async function ChirieFullPopUp({ params }: { params: { id: string
       </div>
       <div className="bg-white dark:bg-gray-950 py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-            <div className="grid gap-2 md:gap-3 lg:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+            <div className="grid gap-2">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">Informatii generale</h2>
               <div className="grid gap-1 md:gap-2">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                  <BedIcon className="w-5 h-5" />
-                  <span>2 Bedrooms</span>
-                </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <RulerIcon className="w-5 h-5" />
                   <span>{propertyInfo.surface}mp</span>
@@ -66,17 +62,14 @@ export default async function ChirieFullPopUp({ params }: { params: { id: string
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <FlagIcon className="w-5 h-5" />
-                  {/* <span>New York, NY</span> */}
-                  {propertyInfo.state}
+                  Stare: {propertyInfo.state}
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <SofaIcon className="w-5 h-5" />
-                  {/* <span>Furnished</span> */}
                   {propertyInfo.furnished ? 'Mobilat' : 'Nemobilat'}
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <DollarSignIcon className="w-5 h-5" />
-                  {/* <span>$2,500/month</span> */}
                   {propertyInfo.price} €
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
@@ -85,18 +78,12 @@ export default async function ChirieFullPopUp({ params }: { params: { id: string
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <HomeIcon className="w-5 h-5" />
-                  {/* <span>Apartment</span> */}
                   {propertyInfo.type}
                 </div>
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                   <SmileIcon className="w-5 h-5" />
                   Nivel comfort: {propertyInfo.comfort}
                 </div>
-              </div>
-            </div>
-            <div className="grid gap-2 md:gap-3 lg:gap-4">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">Dotari</h2>
-              <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
                 {
                   facilities.internet && (
                 <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
@@ -203,7 +190,7 @@ export default async function ChirieFullPopUp({ params }: { params: { id: string
             <div className="grid gap-2 md:gap-3 lg:gap-4">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">Alte informatii</h2>
               <div className="grid gap-1 md:gap-2">
-                <div className="prose text-gray-500 dark:text-gray-400">
+                <div className="prose text-gray-500 dark:text-gray-400 max-h-70 overflow-y-auto">
                   <p>
                     {otherInfo.description}
                   </p>

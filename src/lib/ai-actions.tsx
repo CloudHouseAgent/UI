@@ -24,8 +24,12 @@ export async function continueConversation(
     const history = getMutableAIState();
 
     const result = await streamUI({
-        model: openai('gpt-3.5-turbo'),
-        system: "Esti un asistent de vanzari pentru chirii, scopul tau este sa ajuti clientii sa gaseasca chiria dorita. Ai intrebat initial: 'Salut, cum te pot ajuta?'",
+        model: openai('gpt-4o-2024-05-13'),
+        system: `
+        Esti un asistent de vanzari pentru chirii, scopul tau este sa ajuti clientii sa gaseasca chiria dorita.
+        Daca utilizatorul nu e dispus sa dea detalii multe, poti sa ii oferi chirii disponibile in functie de criteriile tale.
+        Daca specifica ca vrea doar o chirie, seteaza numarul de chirii pe care sa le returneze la 1.
+        Ai intrebat initial: 'Salut, cum te pot ajuta?'`,
         messages: [...history.get(), { role: 'user', content: input }],
         text: ({ content, done }) => {
             if (done) {
@@ -63,8 +67,7 @@ export async function continueConversation(
 
                     history.done((messages: ServerMessage[]) => [
                         ...messages,
-                        { role: 'assistant', content: `Am gasit ${chirii.length} chirii disponibile.
-                        Acestea sunt: ${JSON.stringify(chirii, null, 2)}` },
+                        { role: 'assistant', content: `Am gasit ${chirii.length} chirii disponibile.`},
                     ]);
 
                     return <div className="p-4">

@@ -74,9 +74,9 @@ export default async function Dashboard() {
                                     <TableHead className="hidden w-[100px] sm:table-cell">
                                         <span className="sr-only">Image</span>
                                     </TableHead>
-                                    <TableHead>Name</TableHead>
+                                    <TableHead>Nume</TableHead>
                                     <TableHead className="hidden md:table-cell">
-                                        Price
+                                        Pret
                                     </TableHead>
                                     <TableHead>
                                         <span className="sr-only">Actions</span>
